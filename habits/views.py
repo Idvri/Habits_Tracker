@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from habits.models import HealthyHabit, PleasantHabit
+from habits.paginators import HabitPaginator
 from habits.serializers import HealthyHabitSerializer, PleasantHabitSerializer, CreateHealthyHabitSerializer, \
     UpdateHealthyHabitSerializer
 
@@ -13,6 +14,7 @@ class CreateHealthyHabitApiView(generics.CreateAPIView):
 class ListHealthyHabitApiView(generics.ListAPIView):
     serializer_class = HealthyHabitSerializer
     queryset = HealthyHabit.objects.all()
+    pagination_class = HabitPaginator
 
 
 class RetrieveHealthyHabitApiView(generics.RetrieveAPIView):
@@ -36,6 +38,7 @@ class CreatePleasantHabitApiView(generics.CreateAPIView):
 class ListPleasantHabitApiView(generics.ListAPIView):
     serializer_class = PleasantHabitSerializer
     queryset = PleasantHabit.objects.all()
+    pagination_class = HabitPaginator
 
 
 class RetrievePleasantHabitApiView(generics.RetrieveAPIView):
