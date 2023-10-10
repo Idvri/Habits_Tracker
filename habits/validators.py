@@ -14,3 +14,23 @@ class ValidateReward:
         elif reward and related_habit:
             raise serializers.ValidationError('Нужно указать только награду или только приятную привычку,'
                                               ' но не оба варианта.')
+
+
+class ValidateRewardForUpdate(ValidateReward):
+
+    def __call__(self, value):
+        if 'reward' in dict(value) and 'related_habit' in dict(value):
+            raise serializers.ValidationError('Нужно указать только награду или только приятную привычку,'
+                                              ' но не оба варианта.')
+
+
+class ValidateTimeRequired:
+
+    def __init__(self, time_required):
+        self.time_required = time_required
+
+    def __call__(self, value):
+        if 'time_required' in dict(value):
+            time_required = dict(value).get(self.time_required)
+            if time_required > 120:
+                raise serializers.ValidationError('Время для выполнения привычки не может быть больше 120 секунд')

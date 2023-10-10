@@ -18,7 +18,7 @@ class Habit(models.Model):
     action = models.CharField(max_length=255, verbose_name='действие')
     regularity = models.CharField(max_length=7, choices=REGULARITY_CHOICES, default='Daily',
                                   verbose_name='периодичность')
-    time_for = models.IntegerField(verbose_name='время на выполнение')
+    time_required = models.IntegerField(verbose_name='время на выполнение')
     is_public = models.BooleanField(default=False, verbose_name='признак публичности')
 
     def __str__(self):
