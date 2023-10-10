@@ -5,10 +5,10 @@ from habits.models import HealthyHabit, PleasantHabit
 
 # Register your models here.
 @admin.register(HealthyHabit)
-class HealthyHabit(admin.ModelAdmin):
+class AdminHealthyHabit(admin.ModelAdmin):
     list_display = ('user', 'action', 'related_habit', 'reward')
 
 
 @admin.register(PleasantHabit)
-class PleasantHabit(admin.ModelAdmin):
+class AdminPleasantHabit(admin.ModelAdmin):
     list_display = ('user', 'action')
