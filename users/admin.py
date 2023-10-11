@@ -5,7 +5,7 @@ from users.models import User
 
 # Register your models here.
 @admin.register(User)
-class User(admin.ModelAdmin):
+class AdminUser(admin.ModelAdmin):
     list_display = ('email', 'is_active')
 
     def get_queryset(self, request):
