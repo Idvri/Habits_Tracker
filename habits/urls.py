@@ -3,7 +3,7 @@ from django.urls import path
 from habits.apps import HabitsConfig
 from habits.views import CreateHealthyHabitApiView, CreatePleasantHabitApiView, ListHealthyHabitApiView, \
     RetrieveHealthyHabitApiView, UpdateHealthyHabitApiView, DestroyHealthyHabitApiView, ListPleasantHabitApiView, \
-    RetrievePleasantHabitApiView, UpdatePleasantHabitApiView, DestroyPleasantHabitApiView
+    RetrievePleasantHabitApiView, UpdatePleasantHabitApiView, DestroyPleasantHabitApiView, ListPublicHabitsApiView
 
 app_name = HabitsConfig.name
 
@@ -19,4 +19,6 @@ urlpatterns = [
     path('pleasant_habits/<int:pk>', RetrievePleasantHabitApiView.as_view(), name='overview_pleasant_habit'),
     path('pleasant_habits/update/<int:pk>', UpdatePleasantHabitApiView.as_view(), name='update_pleasant_habit'),
     path('pleasant_habits/delete/<int:pk>', DestroyPleasantHabitApiView.as_view(), name='delete_pleasant_habit'),
+
+    path('public_habits', ListPublicHabitsApiView.as_view(), name='public_habits'),
 ]
