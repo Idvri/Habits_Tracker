@@ -32,10 +32,7 @@ class ListHealthyHabitApiView(generics.ListAPIView):
 class RetrieveHealthyHabitApiView(generics.RetrieveAPIView):
     serializer_class = HealthyHabitSerializer
     queryset = HealthyHabit.objects.all()
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return PleasantHabit.objects.filter(user=self.request.user)
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class UpdateHealthyHabitApiView(generics.UpdateAPIView):
@@ -72,10 +69,7 @@ class ListPleasantHabitApiView(generics.ListAPIView):
 class RetrievePleasantHabitApiView(generics.RetrieveAPIView):
     serializer_class = PleasantHabitSerializer
     queryset = PleasantHabit.objects.all()
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        return PleasantHabit.objects.filter(user=self.request.user)
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class UpdatePleasantHabitApiView(generics.UpdateAPIView):
