@@ -16,7 +16,7 @@ class Habit(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='пользователь',
                              **NULLABLE)
     place = models.CharField(max_length=255, verbose_name='место')
-    time = models.DateTimeField(verbose_name='время, когда необходимо выполнять')
+    time = models.TimeField(verbose_name='время, когда необходимо выполнять')
     action = models.CharField(max_length=255, verbose_name='действие')
     regularity = models.CharField(max_length=7, choices=REGULARITY_CHOICES, default='Daily',
                                   verbose_name='периодичность')
