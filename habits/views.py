@@ -26,7 +26,7 @@ class ListHealthyHabitApiView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return PleasantHabit.objects.filter(user=self.request.user)
+        return PleasantHabit.objects.filter(user=self.request.user).order_by('pk')
 
 
 class RetrieveHealthyHabitApiView(generics.RetrieveAPIView):
@@ -63,7 +63,7 @@ class ListPleasantHabitApiView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return PleasantHabit.objects.filter(user=self.request.user)
+        return PleasantHabit.objects.filter(user=self.request.user).order_by('pk')
 
 
 class RetrievePleasantHabitApiView(generics.RetrieveAPIView):
