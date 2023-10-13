@@ -14,8 +14,10 @@ def check_time():
     for habit in habits:
         if habit.time.replace(second=0, microsecond=0) == current_time:
             # Нужно узнать свой "chat_id" у бота @userinfobot.
-            params = {'chat_id': {CHAT_ID}, 'text': f'Пользователю "{habit.user.email}" '
-                                                    f'пора выполнить привычку: "{habit.action}".'}
+            params = {
+                'chat_id': {CHAT_ID},
+                'text': f'Пользователю "{habit.user.email}" '
+                        f'пора выполнить привычку: "{habit.action}".'}
             response = requests.post(f'{BOT_API}{BOT_API_KEY}/sendMessage', params)
 
             if response.status_code == 200:

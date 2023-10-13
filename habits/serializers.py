@@ -1,7 +1,10 @@
 from rest_framework import serializers
 
 from habits.models import HealthyHabit, PleasantHabit, Habit
-from habits.validators import ValidateReward, ValidateTimeRequired, ValidateRewardForUpdate
+from habits.validators import \
+    ValidateReward, \
+    ValidateTimeRequired, \
+    ValidateRewardForUpdate
 
 
 class HealthyHabitSerializer(serializers.ModelSerializer):
@@ -25,8 +28,13 @@ class UpdateHealthyHabitSerializer(serializers.ModelSerializer):
         model = HealthyHabit
         fields = "__all__"
         validators = [
-            ValidateTimeRequired(time_required='time_required'),
-            ValidateRewardForUpdate(reward='reward', related_habit='related_habit'),
+            ValidateTimeRequired(
+                time_required='time_required'
+            ),
+            ValidateRewardForUpdate(
+                reward='reward',
+                related_habit='related_habit'
+            ),
         ]
 
     def validate(self, data):
@@ -45,7 +53,9 @@ class PleasantHabitSerializer(serializers.ModelSerializer):
         model = PleasantHabit
         fields = "__all__"
         validators = [
-            ValidateTimeRequired(time_required='time_required'),
+            ValidateTimeRequired(
+                time_required='time_required'
+            ),
         ]
 
 
@@ -54,7 +64,9 @@ class CreatePleasantHabitSerializer(serializers.ModelSerializer):
         model = PleasantHabit
         exclude = ('user',)
         validators = [
-            ValidateTimeRequired(time_required='time_required'),
+            ValidateTimeRequired(
+                time_required='time_required'
+            ),
         ]
 
 

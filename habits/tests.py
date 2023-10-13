@@ -1,11 +1,8 @@
-from unittest import TestCase
 
-from django.core.management import call_command
-from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from habits.models import HealthyHabit, PleasantHabit, Habit
+from habits.models import HealthyHabit, PleasantHabit
 from users.models import User
 
 
