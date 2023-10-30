@@ -19,12 +19,29 @@ services:
 
   web:
     build: .
+    tty: true
     command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
     ports:
       - '8001:8000'
     depends_on:
       - db
       - redis
+
+  celery:
+    build: .
+    tty: true
+    command: celery -A config worker -l INFO
+    depends_on:
+      - redis
+      - web
+
+  celery-beat:
+    build: .
+    tty: true
+    command: celery -A config beat -l INFO -S django
+    depends_on:
+      - redis
+      - web
 
 volumes:
   pg_data:
