@@ -10,17 +10,15 @@ services:
       - pg_data:/var/lib/postgresql/data/pgdata
     ports:
       - '5432:5432'
-    command: >
-      bash -c "
-        docker-entrypoint.sh postgres -c listen_addresses=*
-        sleep 2  # Ждем, пока PostgreSQL запустится
-        psql -U postgres -c 'CREATE DATABASE habit_database;'
-        psql -U habit_database
-      "
+    command: ["postgres", "-c", "listen_addresses=*"]
 
   web:
     build: .
-    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+    command: >
+      bash -c "
+        python manage.py migrate
+        python manage.py runserver 0.0.0.0:8000
+      "
     ports:
       - '8001:8000'
 
