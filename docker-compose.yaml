@@ -13,7 +13,7 @@ services:
 
   web:
     build: .
-    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000 && docker-compose exec db psql -U postgres &&  create database habit_database
+    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
     ports:
       - '8001:8000'
 
