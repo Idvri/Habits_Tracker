@@ -10,7 +10,13 @@ services:
       - pg_data:/var/lib/postgresql/data/pgdata
     ports:
       - '5432:5432'
-    command: docker-compose exec db psql -U postgres && create database habit_database; && \q && docker-compose exec db psql -U habit_database
+    command: >
+      bash -c "
+        docker-entrypoint.sh postgres -c listen_addresses=*
+        sleep 2  # Ждем, пока PostgreSQL запустится
+        psql -U postgres -c 'CREATE DATABASE habit_database;'
+        psql -U habit_database
+      "
 
   web:
     build: .
