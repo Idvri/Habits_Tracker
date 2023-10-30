@@ -101,7 +101,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'habit_database',
         'USER': 'postgres',
-        'PASSWORD': 'Nodar126'
+        'PASSWORD': 'Nodar126',
+        'HOST': 'db',
     }
 }
 
