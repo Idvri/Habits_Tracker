@@ -10,15 +10,10 @@ services:
       - pg_data:/var/lib/postgresql/data/pgdata
     ports:
       - '5432:5432'
-    command: ["postgres", "-c", "listen_addresses=*"]
 
   web:
     build: .
-    command: >
-      bash -c "
-        python manage.py migrate
-        python manage.py runserver 0.0.0.0:8000
-      "
+    command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
     ports:
       - '8001:8000'
 
