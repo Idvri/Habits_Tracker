@@ -1,6 +1,12 @@
 version: '3'
 
 services:
+
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+
   db:
     image: postgres
     environment:
@@ -16,6 +22,9 @@ services:
     command: python manage.py migrate && python manage.py runserver 0.0.0.0:8000
     ports:
       - '8001:8000'
+    depends_on:
+      - db
+      - redis
 
 volumes:
   pg_data:
