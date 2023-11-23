@@ -4,23 +4,9 @@
 Команды:
 
 - python manage.py csu - создать админа; Логин: admin@sky.pro; Пароль - Nodar126.
+- docker-compose up --build - запустить проект.
 
-Первоначальная команда:
-
-- docker-compose up --build
-- Ctrl + C - выход.
-
-Предварительная настройка:
-
-1. docker-compose up -d
-2. docker-compose exec db psql -U postgres
-3. CREATE DATABASE habit_database;
-4. \q
-5. docker-compose down
-
-Общая команда для запуска:
-
-- docker-compose up
+Доступен по адресу: 127.0.0.1:8000.
 
 Рекомендации:
 
