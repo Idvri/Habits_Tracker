@@ -3,7 +3,6 @@
 
 Команды:
 
-- python manage.py csu - создать админа; Логин: admin@sky.pro; Пароль - Nodar126.
 - docker-compose up --build - запустить проект.
 
 Доступен по адресу: 127.0.0.1:8000.
