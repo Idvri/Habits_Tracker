@@ -1,10 +1,7 @@
 from rest_framework import serializers
 
 from habits.models import HealthyHabit, PleasantHabit, Habit
-from habits.validators import \
-    ValidateReward, \
-    ValidateTimeRequired, \
-    ValidateRewardForUpdate
+from habits.validators import ValidateReward, ValidateTimeRequired, ValidateRewardForUpdate
 
 
 class HealthyHabitSerializer(serializers.ModelSerializer):

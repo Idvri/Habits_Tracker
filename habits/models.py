@@ -34,7 +34,7 @@ class Habit(models.Model):
     )
 
     def __str__(self):
-        return f'Я буду {self.action} в {self.time} в/на {self.place}.'
+        return f'{self.action}'
 
 
 class PleasantHabit(Habit):

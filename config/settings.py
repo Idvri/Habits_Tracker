@@ -10,9 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+
+from dotenv import load_dotenv
 from datetime import timedelta
 from pathlib import Path
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,8 +44,12 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_simplejwt',
+
     'corsheaders',
-    'drf_yasg',
+
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+
     'django_celery_beat',
 
     'users',
@@ -53,11 +60,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-}
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
 
 MIDDLEWARE = [
@@ -102,7 +105,7 @@ DATABASES = {
         'NAME': 'habit_database',
         'USER': 'postgres',
         'PASSWORD': 'Nodar126',
-        'HOST': 'db',
+        # 'HOST': 'db',
     }
 }
 
@@ -129,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -150,6 +153,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
 ]
@@ -169,10 +177,19 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_BEAT_SCHEDULE = {
     'send_notification': {
         'task': 'habits.tasks.check_time',
-        'schedule': timedelta(minutes=1),
+        'schedule': timedelta(seconds=1),
+    },
+    'check_user': {
+        'task': 'habits.tasks.check_user',
+        'schedule': timedelta(seconds=1),
     },
 }
 
 BOT_API = os.getenv('BOT_API')
 BOT_API_KEY = os.getenv('BOT_API_KEY')
-CHAT_ID = os.getenv('CHAT_ID')
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Habits Tracker API',
+    'DESCRIPTION': 'This is an official API documentation.',
+    'VERSION': '0.0.1',
+}
