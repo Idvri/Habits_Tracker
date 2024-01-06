@@ -105,7 +105,8 @@ DATABASES = {
         'NAME': 'habit_database',
         'USER': 'postgres',
         'PASSWORD': 'Nodar126',
-        # 'HOST': 'db',
+        'HOST': 'db',
+        'PORT': '5432'
     }
 }
 
@@ -181,7 +182,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     'check_user': {
         'task': 'habits.tasks.check_user',
-        'schedule': timedelta(seconds=1),
+        'schedule': timedelta(minutes=1),
     },
 }
 

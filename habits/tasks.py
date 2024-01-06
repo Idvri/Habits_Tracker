@@ -16,9 +16,11 @@ def check_user():
     res = requests.post(f'{BOT_API}{BOT_API_KEY}/getUpdates')
     users = User.objects.all()
     for member in res.json()['result']:
-        if 'my_chat_member' in member:
-            chat_id = member['my_chat_member']['chat']['id']
-            telegram_username = member['my_chat_member']['chat']['username']
+        if 'message' not in member:
+            continue
+        if member['message']['text'] == '/start':
+            chat_id = member['message']['from']['id']
+            telegram_username = member['message']['from']['username']
             if telegram_username in [user.telegram for user in users]:
                 user = users.filter(telegram=telegram_username).first()
                 if user and not user.chat:
@@ -30,9 +32,10 @@ def check_user():
 @shared_task
 def check_time():
     current_time = datetime.now().time().replace(second=0, microsecond=0)
+    print(current_time)
     habits = Habit.objects.all()
     for habit in habits:
-        if habit.time.replace(second=0, microsecond=0) == current_time:
+        if habit.time.replace(second=0, microsecond=0) == current_time and habit.user.chat:
             params = {
                 'chat_id': habit.user.chat,
                 'text': f'Пора выполнить привычку: "{habit.action}".'}
