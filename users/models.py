@@ -9,6 +9,8 @@ NULLABLE = {'null': True, 'blank': True}
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='почта')
+    telegram = models.CharField(max_length=64, unique=True, verbose_name='Telegram', **NULLABLE)
+    chat = models.IntegerField(unique=True, verbose_name='айди чата', **NULLABLE)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
